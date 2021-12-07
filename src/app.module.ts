@@ -9,6 +9,8 @@ import { UsersModule } from './Modules/users/users.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       database: 'boilerplate',
+      username: 'boilerplate',
+      password: 'boilerplate',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
