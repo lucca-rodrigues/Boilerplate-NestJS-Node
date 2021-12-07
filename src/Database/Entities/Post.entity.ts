@@ -1,17 +1,13 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-// import { Post } from './Post.entity';
 
 @Entity()
-export class Users {
+export class Posts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ type: 'varchar', length: 300 })
-  name: string;
+  title: string;
 
   @Column({ type: 'varchar', length: 500 })
-  email: string;
-
-  // @OneToMany((type) => Post, (item) => item.title)
-  // posts: Post[];
+  description: string;
 }
