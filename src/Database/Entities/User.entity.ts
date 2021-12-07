@@ -18,6 +18,6 @@ export class Users {
   @Column({ type: 'varchar', length: 500 })
   email: string;
 
-  @OneToMany((type) => Post, (item) => item.title)
+  @OneToMany((type) => Post, (item) => item.id)
   posts: Post[];
 }
