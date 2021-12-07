@@ -1,5 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-// import { Post } from './Post.entity';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm';
+import { Post } from './Post.entity';
 
 @Entity()
 export class Users {
@@ -12,6 +18,6 @@ export class Users {
   @Column({ type: 'varchar', length: 500 })
   email: string;
 
-  // @OneToMany((type) => Post, (item) => item.title)
-  // posts: Post[];
+  @OneToMany((type) => Post, (item) => item.title)
+  posts: Post[];
 }
