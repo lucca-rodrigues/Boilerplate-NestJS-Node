@@ -23,6 +23,7 @@
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -f TypeOrmConfig.ts"
   },
   "dependencies": {
+    "@nestjs-modules/mailer": "^1.6.0",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",

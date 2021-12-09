@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -11,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { Users } from '../../Database/Entities/User.entity';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './Dtos/createUser.dto';
+import { CreateUserDto } from './Dtos/createuser.dto';
 import { UpdateUserDto } from './Dtos/updateUser.dto';
 import { ValidateParams } from 'Modules/PipeValidations/validationParams';
 
@@ -26,7 +27,11 @@ export class UsersController {
 
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Users> {
-    return await this.usersService.findById(id);
+    const user = await this.usersService.findById(id);
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    return user;
   }
 
   @Post()
