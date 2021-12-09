@@ -31,17 +31,20 @@ export class UsersController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body(ValidateParams) dto: CreateUserDto) {
-    await this.usersService.create(dto);
+  async create(@Body(ValidateParams) user: CreateUserDto) {
+    await this.usersService.create(user);
+    return user;
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-    this.usersService.update(id, dto);
+  async update(@Param('id') id: string, @Body() user: UpdateUserDto) {
+    await this.usersService.update(id, user);
+    return user;
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    this.usersService.delete(id);
+  async delete(@Param('id') id: string) {
+    await this.usersService.delete(id);
+    return { message: 'User deleted' };
   }
 }
