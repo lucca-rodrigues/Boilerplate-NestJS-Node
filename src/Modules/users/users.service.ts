@@ -40,13 +40,6 @@ export class UsersService {
     if (emailAlreadyExists) {
       throw new UnauthorizedException('Email already exists');
     }
-
-    // const user = this.usersRepository.create({
-    //   name: dto.name,
-    //   email: dto.email,
-    //   password: dto.password,
-    // });
-
     const user = this.usersRepository.create(dto);
 
     return await this.usersRepository.save(user);
