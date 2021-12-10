@@ -1,20 +1,13 @@
 import {
-  BadRequestException,
   Injectable,
-  Res,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'Database/Entities/User.entity';
-import { Repository } from 'typeorm';
+import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CreateUserDto } from './Dtos/createuser.dto';
 import { UpdateUserDto } from './Dtos/updateUser.dto';
-
-interface IUser {
-  id: string;
-  username: string;
-  email: string;
-}
 
 @Injectable()
 export class UsersService {
@@ -29,6 +22,17 @@ export class UsersService {
 
   findById(id: string): Promise<Users> {
     return this.usersRepository.findOne(id);
+  }
+
+  async findOneOrFail(
+    conditions: FindConditions<Users>,
+    options?: FindOneOptions<Users>,
+  ) {
+    try {
+      return await this.usersRepository.findOneOrFail(conditions, options);
+    } catch (error) {
+      throw new NotFoundException(error.message);
+    }
   }
 
   async create(dto: CreateUserDto) {
