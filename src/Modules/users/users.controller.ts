@@ -15,12 +15,22 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './Dtos/createuser.dto';
 import { UpdateUserDto } from './Dtos/updateUser.dto';
 import { ValidateParams } from 'Modules/PipeValidations/validationParams';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UsersSwagger } from './Swagger/users.swagger';
 
 @Controller('users')
+@ApiTags('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Listar usuários' })
+  @ApiResponse({
+    status: 200,
+    description: 'Users list',
+    type: UsersSwagger,
+    isArray: true,
+  })
   async findAll(): Promise<Users[]> {
     return await this.usersService.findAll();
   }
