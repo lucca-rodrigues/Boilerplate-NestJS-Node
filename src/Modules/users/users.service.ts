@@ -41,10 +41,15 @@ export class UsersService {
       throw new UnauthorizedException('Email already exists');
     }
 
-    await this.usersRepository.insert({
-      name: dto.name,
-      email: dto.email,
-    });
+    // const user = this.usersRepository.create({
+    //   name: dto.name,
+    //   email: dto.email,
+    //   password: dto.password,
+    // });
+
+    const user = this.usersRepository.create(dto);
+
+    return await this.usersRepository.save(user);
   }
 
   update(id: string, dto: UpdateUserDto) {
