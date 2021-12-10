@@ -31,6 +31,14 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
+  async findByEmail(email: string) {
+    return await this.usersRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
+  }
+
   async create(dto: CreateUserDto) {
     const { email } = dto;
     const emailAlreadyExists = await this.usersRepository.findOne({
