@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -17,6 +18,7 @@ import { UpdateUserDto } from './Dtos/updateUser.dto';
 import { ValidateParams } from 'Modules/PipeValidations/validationParams';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersSwagger } from './Swagger/users.swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
 @ApiTags('users')
@@ -24,6 +26,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Listar usuários' })
   @ApiResponse({
     status: 200,
@@ -36,6 +39,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   async findById(@Param('id') id: string): Promise<Users> {
     const user = await this.usersService.findById(id);
     if (!user) {
@@ -52,12 +56,14 @@ export class UsersController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
   async update(@Param('id') id: string, @Body() user: UpdateUserDto) {
     await this.usersService.update(id, user);
     return user;
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   async delete(@Param('id') id: string) {
     await this.usersService.delete(id);
     return { message: 'User deleted' };
