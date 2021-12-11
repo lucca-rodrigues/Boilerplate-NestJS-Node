@@ -13,11 +13,11 @@ import {
 } from '@nestjs/common';
 import { Users } from '../../Database/Entities/User.entity';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './Dtos/createuser.dto';
-import { UpdateUserDto } from './Dtos/updateUser.dto';
-import { ValidateParams } from 'Modules/PipeValidations/validationParams';
+import { CreateUserDto } from './dtos/createuser.dto';
+import { UpdateUserDto } from './dtos/updateUser.dto';
+import { ValidateParams } from 'Utils/PipeValidations/validationParams';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UsersSwagger } from './Swagger/users.swagger';
+import { UsersSwagger } from '../../Swagger/users.swagger';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')

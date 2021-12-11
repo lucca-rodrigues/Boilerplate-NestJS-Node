@@ -6,8 +6,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'Database/Entities/User.entity';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
-import { CreateUserDto } from './Dtos/createuser.dto';
-import { UpdateUserDto } from './Dtos/updateUser.dto';
+import { CreateUserDto } from './dtos/createuser.dto';
+import { UpdateUserDto } from './dtos/updateUser.dto';
 
 @Injectable()
 export class UsersService {

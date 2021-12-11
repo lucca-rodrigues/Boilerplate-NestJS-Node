@@ -10,10 +10,12 @@ async function bootstrap() {
     .setTitle('Boilerplate API')
     .setDescription('This is the API for the Backoffice')
     .setVersion('1.0')
-    // .addTag('backoffice')
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
+
   SwaggerModule.setup('api/docs', app, document);
+
   app.useGlobalPipes(
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
